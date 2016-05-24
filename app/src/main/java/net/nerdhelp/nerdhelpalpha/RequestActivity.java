@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.provider.Settings.Secure;
 
+import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -44,15 +45,39 @@ public class RequestActivity extends AppCompatActivity {
 
     public void writeToFirebase(String name, String email, String phone, String add, String prbdesc) {
         // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("inquiries");
-        myRef.child("newInquiryFrom  " + name).child("name").setValue(name);
-        myRef.child("newInquiryFrom  " + name).child("email").setValue(email);
-        myRef.child("newInquiryFrom  " + name).child("phone").setValue(phone);
-        myRef.child("newInquiryFrom  " + name).child("address").setValue(add);
-        myRef.child("newInquiryFrom  " + name).child("problem desc").setValue(prbdesc);
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("inquiries");
+//        myRef.child("newInquiryFrom  " + name).child("name").setValue(name);
+//        myRef.child("newInquiryFrom  " + name).child("email").setValue(email);
+//        myRef.child("newInquiryFrom  " + name).child("phone").setValue(phone);
+//        myRef.child("newInquiryFrom  " + name).child("address").setValue(add);
+//        myRef.child("newInquiryFrom  " + name).child("problem desc").setValue(prbdesc);
 
-        //display submittal message
+        BackgroundMail.newBuilder(this)
+                .withUsername("nerdhelpapp@gmail.com")
+                .withPassword("joeymcenery")
+                .withMailto("joey.mcenery@gmail.com")
+                .withSubject("New NerdHelp inquiry from Android App")
+                .withBody(name + "\n" + email + "\n" + phone + "\n" + add + "\n" + prbdesc)
+                .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
+                    @Override
+                    public void onSuccess() {
+                        //do some magic
+
+                    }
+                })
+                .withOnFailCallback(new BackgroundMail.OnFailCallback() {
+                    @Override
+                    public void onFail() {
+                        //do some magic
+                        Context context = getApplicationContext();
+                        CharSequence text = "There was a problem submitting your request. Please call or email NerdHelp directly. See www.NerdHelp.net for details.";
+                        int duration = Toast.LENGTH_LONG;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                })
+                .send();
         Context context = getApplicationContext();
         CharSequence text = "Your inquiry has been submitted! NerdHelp will be contacting you soon!";
         int duration = Toast.LENGTH_LONG;
@@ -60,5 +85,13 @@ public class RequestActivity extends AppCompatActivity {
         toast.show();
         Intent intent = new Intent(RequestActivity.this, NaviActivity.class);
         startActivity(intent);
+        //display submittal message
+//        Context context = getApplicationContext();
+//        CharSequence text = "Your inquiry has been submitted! NerdHelp will be contacting you soon!";
+//        int duration = Toast.LENGTH_LONG;
+//        Toast toast = Toast.makeText(context, text, duration);
+//        toast.show();
+//        Intent intent = new Intent(RequestActivity.this, NaviActivity.class);
+//        startActivity(intent);
     }
 }
