@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "763500790511",
+    "firebase_url": "https://project-4172568702543247535.firebaseio.com",
+    "project_id": "project-4172568702543247535",
+    "storage_bucket": "project-4172568702543247535.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763500790511:android:14a9e0ab0277353d",
+        "android_client_info": {
+          "package_name": "net.nerdhelp.nerdhelpalpha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "763500790511-9knvhmla9v51f20j5jlbeqbo4kcc38f2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABGhE1zomrRi2yZ3daT6WjY-E5RjcD8zM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
