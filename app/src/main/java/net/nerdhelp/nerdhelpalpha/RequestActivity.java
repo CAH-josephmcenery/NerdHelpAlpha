@@ -15,26 +15,29 @@ public class RequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request);
     }
-public void onSubmit(View view){
-    EditText nameF = (EditText) findViewById(R.id.name);
-    String name = nameF.getText().toString();
 
-    EditText emailAddressF = (EditText) findViewById(R.id.email_address);
-    String emailAddress = emailAddressF.getText().toString();
 
-    EditText phoneNumberF = (EditText) findViewById(R.id.phone_number);
-    String phoneNumber = phoneNumberF.getText().toString();
+    public void onSubmit(View view) {
+        EditText nameF = (EditText) findViewById(R.id.name);
+        String name = nameF.getText().toString();
 
-    EditText streetAddressF = (EditText) findViewById(R.id.street_address);
-    String streetAddress = streetAddressF.getText().toString();
+        EditText emailAddressF = (EditText) findViewById(R.id.email_address);
+        String emailAddress = emailAddressF.getText().toString();
 
-    EditText problemDescriptionF = (EditText) findViewById(R.id.problem_description);
-    String problemDescription = problemDescriptionF.getText().toString();
+        EditText phoneNumberF = (EditText) findViewById(R.id.phone_number);
+        String phoneNumber = phoneNumberF.getText().toString();
 
-    String emailBody = (""+ name+"\n"+emailAddress+"\n"+phoneNumber+"\n"+streetAddress+"\n"+problemDescription);
-    createEmail(joeysEmail, "NerdHelp request via android app", emailBody);
-}
-    public void createEmail(String[] addresses, String subject, String body){
+        EditText streetAddressF = (EditText) findViewById(R.id.street_address);
+        String streetAddress = streetAddressF.getText().toString();
+
+        EditText problemDescriptionF = (EditText) findViewById(R.id.problem_description);
+        String problemDescription = problemDescriptionF.getText().toString();
+
+        String emailBody = ("" + name + "\n" + emailAddress + "\n" + phoneNumber + "\n" + streetAddress + "\n" + problemDescription);
+        createEmail(joeysEmail, "NerdHelp request via android app", emailBody);
+    }
+
+    public void createEmail(String[] addresses, String subject, String body) {
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
