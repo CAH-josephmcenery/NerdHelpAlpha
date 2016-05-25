@@ -120,7 +120,33 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:ems="10"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:hint="I need help setting up my new Bose sound system!"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Preferred Appointment Times"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000000"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="To better serve you, NerdHelp typically only offers appointments on weekday evenings and weekends. Please leave a comment here indicating your preferred appointment days/times."
+                />
+
+            <EditText
+                android:id="@+id/pref_times"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:hint="Thursdays and Fridays after 7"/>
 
             <Button
                 android:id="@+id/button"
