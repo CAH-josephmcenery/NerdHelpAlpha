@@ -1,11 +1,15 @@
 package net.nerdhelp.nerdhelpalpha;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 
 public class RequestActivity extends AppCompatActivity {
     String[] joeysEmail = {"joey.mcenery@gmail.com"};
@@ -34,18 +38,35 @@ public class RequestActivity extends AppCompatActivity {
         String problemDescription = problemDescriptionF.getText().toString();
 
         String emailBody = ("" + name + "\n" + emailAddress + "\n" + phoneNumber + "\n" + streetAddress + "\n" + problemDescription);
-        createEmail(joeysEmail, "NerdHelp request via android app", emailBody);
+        createEmail(emailBody);
     }
 
-    public void createEmail(String[] addresses, String subject, String body) {
+    public void createEmail(String body) {
 
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        intent.putExtra(Intent.EXTRA_TEXT, body);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
+        BackgroundMail.newBuilder(this)
+                .withUsername("nerdhelpapp@gmail.com")
+                .withPassword("mceneryandroid")
+                .withMailto("joey.mcenery@gmail.com")
+                .withSubject("NerdHelp Inquiry from app")
+                .withBody(body)
+                .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
+                    @Override
+                    public void onSuccess() {
+                        Context context = getApplicationContext();
+                        CharSequence text = "Your request has been submitted. We will contact you soon!";
+                        int duration = Toast.LENGTH_LONG;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                })
+                .withOnFailCallback(new BackgroundMail.OnFailCallback() {
+                    @Override
+                    public void onFail() {
+                        //do some magic
+                    }
+                })
+                .send();
+        setContentView(R.layout.activity_navi);
     }
 }
