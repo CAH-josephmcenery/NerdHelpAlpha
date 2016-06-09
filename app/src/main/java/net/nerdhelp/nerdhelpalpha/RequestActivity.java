@@ -37,7 +37,10 @@ public class RequestActivity extends AppCompatActivity {
         EditText problemDescriptionF = (EditText) findViewById(R.id.problem_description);
         String problemDescription = problemDescriptionF.getText().toString();
 
-        String emailBody = ("" + name + "\n" + emailAddress + "\n" + phoneNumber + "\n" + streetAddress + "\n" + problemDescription);
+        EditText prefTimesF = (EditText) findViewById(R.id.pref_times);
+        String prefTimes = prefTimesF.getText().toString();
+
+        String emailBody = ("" + name + "\n" + emailAddress + "\n" + phoneNumber + "\n" + streetAddress + "\n" + problemDescription + "\n" + prefTimes);
         createEmail(emailBody);
     }
 
@@ -67,6 +70,15 @@ public class RequestActivity extends AppCompatActivity {
                     }
                 })
                 .send();
-        setContentView(R.layout.activity_navi);
+
+        Context context = getApplicationContext();
+        CharSequence text = "Your request has been submitted. We will contact you soon!";
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
+        Intent intent = new Intent(RequestActivity.this, NaviActivity.class);
+        startActivity(intent);
     }
 }
